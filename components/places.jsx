@@ -2,6 +2,9 @@ import React from "react";
 import Select from "react-select";
 import styled from "@emotion/styled";
 
+import emitter from "../helpers/events";
+import { getNearbyPlaces } from "../helpers/places";
+
 const placeTypes = [
   { value: "airport", label: "Airports" },
   { value: "atm", label: "ATMs" },
@@ -26,12 +29,36 @@ const placeTypes = [
   { value: "zoo", label: "Zoo" }
 ];
 
+const defaultValues = placeTypes.filter(type =>
+  [
+    "atm",
+    "bank",
+    "bus_station",
+    "hospital",
+    "pharmacy",
+    "train_station"
+  ].includes(type.value)
+);
+
 const PlacesWrapper = styled.div`
-  width: 45vw;
+  width: 75vw;
 `;
 
-export default () => (
-  <PlacesWrapper>
-    <Select isMulti options={placeTypes} />
-  </PlacesWrapper>
-);
+export default class Places extends React.Component {
+  state = { selectedValues: defaultValues };
+
+  componentDidMount() {
+    emitter.addListener("FETCH_NEARBY", location => {
+      const { selectedValues } = this.state;
+      getNearbyPlaces(location.latitude, location.longitude, selectedValues);
+    });
+  }
+
+  render() {
+    return (
+      <PlacesWrapper>
+        <Select isMulti options={placeTypes} defaultValue={defaultValues} />
+      </PlacesWrapper>
+    );
+  }
+}

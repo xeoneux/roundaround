@@ -2,7 +2,6 @@ import React from "react";
 import ReactMapGL, { FlyToInterpolator } from "react-map-gl";
 
 import emitter from "../helpers/events";
-import { getNearbyPlaces } from "../helpers/places";
 
 import "mapbox-gl/dist/mapbox-gl.css";
 
@@ -27,9 +26,9 @@ export default class Map extends React.Component {
         transitionInterpolator: new FlyToInterpolator()
       };
 
-      this.setState({ viewport: { ...viewport, ...newViewport } }, () => {
-        getNearbyPlaces(latitude, longitude, ["atm"]);
-      });
+      this.setState({ viewport: { ...viewport, ...newViewport } }, () =>
+        emitter.emit("FETCH_NEARBY", { latitude, longitude })
+      );
     });
   }
 
