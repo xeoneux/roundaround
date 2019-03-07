@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "dotenv": "^6.2.0",
     "esm": "^3.2.11",
     "express": "^4.16.4",
     "next": "^8.0.3",
@@ -22,6 +23,6 @@
   "scripts": {
     "dev": "node .",
     "build": "next build",
-    "start": "next start"
+    "start": "NODE_ENV=production next start"
   }
 }
