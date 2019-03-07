@@ -1,4 +1,5 @@
 import React from "react";
+import Head from "next/head";
 import styled from "@emotion/styled";
 
 import Map from "./map";
@@ -23,6 +24,16 @@ const Header = styled.header`
 export default () => (
   <>
     <Global />
+    <Head>
+      <title>roundAround</title>
+      <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      <script
+        type="text/javascript"
+        src={`https://maps.googleapis.com/maps/api/js?key=${
+          process.env.GOOGLE
+        }&libraries=places`}
+      />
+    </Head>
     <Header>
       <Places />
       <Logo />
