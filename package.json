@@ -1,12 +1,16 @@
 {
   "dependencies": {
+    "@zeit/next-css": "^1.0.1",
     "dotenv": "^6.2.0",
     "esm": "^3.2.11",
     "express": "^4.16.4",
+    "mapbox-gl": "^0.53.1",
     "next": "^8.0.3",
     "next-routes": "^1.4.2",
     "react": "^16.8.4",
-    "react-dom": "^16.8.4"
+    "react-dom": "^16.8.4",
+    "react-map-gl": "^4.0.14",
+    "webpack": "^4.29.6"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
