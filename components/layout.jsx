@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 import Map from "./map";
 import Logo from "./logo";
 import Places from "./places";
+import Global from "../styles/global";
 
 import "sanitize.css";
 
@@ -22,6 +23,7 @@ export default class Layout extends React.Component {
   render() {
     return (
       <>
+        <Global />
         <Header>
           <Places />
           <Logo />
