@@ -1,40 +1,45 @@
 import React from "react";
-import ReactMapGL from "react-map-gl";
-import { geolocated } from "react-geolocated";
+import ReactMapGL, { FlyToInterpolator } from "react-map-gl";
+
+import emitter from "../helpers/events";
 
 import "mapbox-gl/dist/mapbox-gl.css";
 
-class Map extends React.Component {
+export default class Map extends React.Component {
   state = {
     viewport: {
       zoom: 8,
-      latitude: 20.5937,
-      longitude: 78.9629
+      latitude: 40.7128,
+      longitude: -74.006
     }
   };
 
-  render() {
-    const { coords } = this.props;
-    const { viewport } = this.state;
+  componentDidMount() {
+    emitter.addListener("UPDATE_LOCATION", location => {
+      const { viewport } = this.state;
+      const { latitude, longitude } = location;
+      const newViewport = {
+        zoom: 8,
+        latitude,
+        longitude,
+        transitionDuration: 3000,
+        transitionInterpolator: new FlyToInterpolator()
+      };
 
-    const { zoom } = viewport;
-    const latitude = (coords && coords.latitude) || viewport.latitude;
-    const longitude = (coords && coords.longitude) || viewport.longitude;
+      this.setState({ viewport: { ...viewport, ...newViewport } });
+    });
+  }
+
+  render() {
+    const { viewport } = this.state;
     return (
       <ReactMapGL
-        zoom={zoom}
+        {...viewport}
         width="100vw"
         height="100vh"
-        latitude={latitude}
-        longitude={longitude}
         mapboxApiAccessToken={process.env.MAPBOX}
         onViewportChange={vp => this.setState({ viewport: vp })}
       />
     );
   }
 }
-
-export default geolocated({
-  userDecisionTimeout: 5000,
-  positionOptions: { enableHighAccuracy: false }
-})(Map);

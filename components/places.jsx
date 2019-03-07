@@ -30,12 +30,8 @@ const PlacesWrapper = styled.div`
   width: 45vw;
 `;
 
-export default class Places extends React.Component {
-  render() {
-    return (
-      <PlacesWrapper>
-        <Select isMulti options={placeTypes} />
-      </PlacesWrapper>
-    );
-  }
-}
+export default () => (
+  <PlacesWrapper>
+    <Select isMulti options={placeTypes} />
+  </PlacesWrapper>
+);
