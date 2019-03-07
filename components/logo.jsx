@@ -1,3 +1,12 @@
 import React from "react";
+import styled from "@emotion/styled";
 
-export default () => <h1>roundAround</h1>;
+const LogoWrapper = styled.div`
+  padding-left: 1em;
+`;
+
+export default () => (
+  <LogoWrapper>
+    <h1>roundAround</h1>
+  </LogoWrapper>
+);
