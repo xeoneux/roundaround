@@ -9,6 +9,7 @@
     "next-routes": "^1.4.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
+    "react-geolocated": "^2.4.1",
     "react-map-gl": "^4.0.14",
     "webpack": "^4.29.6"
   },

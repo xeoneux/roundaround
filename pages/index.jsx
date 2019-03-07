@@ -1,26 +1,40 @@
 import React from "react";
-
 import ReactMapGL from "react-map-gl";
+import { geolocated } from "react-geolocated";
+
 import "mapbox-gl/dist/mapbox-gl.css";
 
-export default class Map extends React.Component {
+class Map extends React.Component {
   state = {
     viewport: {
-      width: "100vw",
-      height: "100vh",
-      latitude: 37.7577,
-      longitude: -122.4376,
-      zoom: 8
+      zoom: 8,
+      latitude: 20.5937,
+      longitude: 78.9629
     }
   };
 
   render() {
+    const { coords } = this.props;
+    const { viewport } = this.state;
+
+    const { zoom } = viewport;
+    const latitude = (coords && coords.latitude) || viewport.latitude;
+    const longitude = (coords && coords.longitude) || viewport.longitude;
     return (
       <ReactMapGL
-        {...this.state.viewport}
+        zoom={zoom}
+        width="100vw"
+        height="100vh"
+        latitude={latitude}
+        longitude={longitude}
         mapboxApiAccessToken={process.env.MAPBOX}
         onViewportChange={viewport => this.setState({ viewport })}
       />
     );
   }
 }
+
+export default geolocated({
+  userDecisionTimeout: 5000,
+  positionOptions: { enableHighAccuracy: false }
+})(Map);
