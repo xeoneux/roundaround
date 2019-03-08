@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { geolocated, geoPropTypes } from "react-geolocated";
 
 import emitter from "../helpers/events";
+import LocationIcon from "../assets/icons/location";
 
 const LocationWrapper = styled.footer`
   left: 2em;
@@ -13,6 +14,17 @@ const LocationWrapper = styled.footer`
   position: absolute;
   align-items: center;
   justify-content: center;
+`;
+
+const LocationIconWrapper = styled.button`
+  border: none;
+  background: transparent;
+`;
+
+const LocationValueWrapper = styled.p`
+  border: none;
+  margin: 0 0.5em;
+  background: transparent;
 `;
 
 class Location extends React.Component {
@@ -27,13 +39,18 @@ class Location extends React.Component {
 
   render() {
     const { coords } = this.props;
-    const lat = (coords && coords.latitude) || "__";
-    const long = (coords && coords.longitude) || "__";
+    const lat =
+      (coords && coords.latitude && coords.latitude.toFixed(4)) || "__";
+    const long =
+      (coords && coords.longitude && coords.longitude.toFixed(4)) || "__";
+
     return (
       <LocationWrapper>
-        {lat}
-
-        {long}
+        <LocationIconWrapper type="button" disabled={!coords}>
+          <LocationIcon />
+        </LocationIconWrapper>
+        <LocationValueWrapper>{lat}</LocationValueWrapper>
+        <LocationValueWrapper>{long}</LocationValueWrapper>
       </LocationWrapper>
     );
   }
