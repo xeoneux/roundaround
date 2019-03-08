@@ -6,7 +6,7 @@ import Select from "react-select";
 import styled from "@emotion/styled";
 
 import emitter from "../helpers/events";
-import { getNearbyPlaces } from "../helpers/places";
+import getNearbyPlaces from "../helpers/places";
 
 const customStyles = {
   option: (styles, { data, isFocused, isSelected }) => {
@@ -76,9 +76,23 @@ export default class Places extends React.Component {
   state = { selectedValues: defaultValues };
 
   componentDidMount() {
-    emitter.addListener("FETCH_NEARBY", location => {
+    emitter.addListener("FETCH_NEARBY", async location => {
       const { selectedValues } = this.state;
-      getNearbyPlaces(location.latitude, location.longitude, selectedValues);
+      const results = await getNearbyPlaces(
+        location.latitude,
+        location.longitude,
+        selectedValues
+      );
+
+      emitter.emit(
+        "PRINT_NEARBY",
+        results.map(result => {
+          return {
+            latitude: result.geometry.location.lat(),
+            longitude: result.geometry.location.lng()
+          };
+        })
+      );
     });
   }
 

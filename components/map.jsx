@@ -1,12 +1,14 @@
 import React from "react";
-import ReactMapGL, { FlyToInterpolator } from "react-map-gl";
+import ReactMapGL, { Marker, FlyToInterpolator } from "react-map-gl";
 
 import emitter from "../helpers/events";
+import PinIcon from "../assets/icons/pin";
 
 import "mapbox-gl/dist/mapbox-gl.css";
 
 export default class Map extends React.Component {
   state = {
+    markers: [],
     viewport: {
       zoom: 8,
       latitude: 40.7128,
@@ -30,6 +32,8 @@ export default class Map extends React.Component {
         emitter.emit("FETCH_NEARBY", { latitude, longitude })
       );
     });
+
+    emitter.addListener("PRINT_NEARBY", markers => this.setState({ markers }));
   }
 
   componentWillUnmount() {
@@ -37,7 +41,7 @@ export default class Map extends React.Component {
   }
 
   render() {
-    const { viewport } = this.state;
+    const { markers, viewport } = this.state;
     return (
       <ReactMapGL
         {...viewport}
@@ -45,7 +49,13 @@ export default class Map extends React.Component {
         height="100vh"
         mapboxApiAccessToken={process.env.MAPBOX}
         onViewportChange={vp => this.setState({ viewport: vp })}
-      />
+      >
+        {markers.map(marker => (
+          <Marker {...marker}>
+            <PinIcon color="red" />
+          </Marker>
+        ))}
+      </ReactMapGL>
     );
   }
 }
