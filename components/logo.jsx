@@ -5,8 +5,12 @@ const LogoWrapper = styled.div`
   padding-left: 1em;
 `;
 
+const Logo = styled.h1`
+  font-weight: 100;
+`;
+
 export default () => (
   <LogoWrapper>
-    <h1>roundAround</h1>
+    <Logo>roundAround</Logo>
   </LogoWrapper>
 );

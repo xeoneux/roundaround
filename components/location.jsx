@@ -23,7 +23,7 @@ const LocationIconWrapper = styled.button`
 
 const LocationValueWrapper = styled.p`
   border: none;
-  margin: 0 0.5em;
+  margin: 0 0.25em;
   background: transparent;
 `;
 
@@ -31,11 +31,13 @@ class Location extends React.Component {
   static propTypes = { ...geoPropTypes };
 
   componentDidUpdate(prevProps) {
-    if (this.props !== prevProps) {
-      const { coords } = this.props;
-      if (coords) emitter.emit("UPDATE_LOCATION", coords);
-    }
+    if (this.props !== prevProps) this.updateLocation();
   }
+
+  updateLocation = () => {
+    const { coords } = this.props;
+    if (coords) emitter.emit("UPDATE_LOCATION", coords);
+  };
 
   render() {
     const { coords } = this.props;
@@ -46,7 +48,11 @@ class Location extends React.Component {
 
     return (
       <LocationWrapper>
-        <LocationIconWrapper type="button" disabled={!coords}>
+        <LocationIconWrapper
+          type="button"
+          disabled={!coords}
+          onClick={this.updateLocation}
+        >
           <LocationIcon />
         </LocationIconWrapper>
         <LocationValueWrapper>{lat}</LocationValueWrapper>

@@ -25,7 +25,7 @@ const customStyles = {
         : data.color
     };
   },
-  control: (provided, state) => ({
+  control: provided => ({
     ...provided,
     border: "none",
     backgroundColor: "rgba(255, 255, 255, 0.5)"
@@ -58,28 +58,14 @@ const placeTypes = [
   { value: "bar", label: "Bars", color: "#FF5630" },
   { value: "bus_station", label: "Bus Stations", color: "#FF8B00" },
   { value: "cafe", label: "Cafes", color: "#FFC400" },
-  { value: "car_repair", label: "Car Repair", color: "#36B37E" },
-  { value: "church", label: "Churches", color: "#00875A" },
-  { value: "dentist", label: "Dentist", color: "#253858" },
-  { value: "doctor", label: "Doctor", color: "#666666" }
-  // { value: "gym", label: "Gym" },
-  // { value: "hospital", label: "Hospitals" },
-  // { value: "library", label: "Library" },
-  // { value: "movie_theater", label: "Movie Theaters" },
-  // { value: "pharmacy", label: "Pharmacies" },
-  // { value: "school", label: "Schools" },
-  // { value: "train_station", label: "Train Stations" },
+  { value: "hospital", label: "Hospitals", color: "#36B37E" },
+  { value: "pharmacy", label: "Pharmacies", color: "#00875A" },
+  { value: "school", label: "Schools", color: "#253858" },
+  { value: "train_station", label: "Train Stations", color: "#666666" }
 ];
 
 const defaultValues = placeTypes.filter(type =>
-  [
-    "atm",
-    "bank",
-    "bus_station"
-    // "hospital",
-    // "pharmacy",
-    // "train_station"
-  ].includes(type.value)
+  ["atm", "bar", "pharmacy"].includes(type.value)
 );
 
 const PlacesWrapper = styled.div`

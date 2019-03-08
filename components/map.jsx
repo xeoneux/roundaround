@@ -22,7 +22,7 @@ export default class Map extends React.Component {
         zoom: 15,
         latitude,
         longitude,
-        transitionDuration: 3000,
+        transitionDuration: 2000,
         transitionInterpolator: new FlyToInterpolator()
       };
 
