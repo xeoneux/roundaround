@@ -36,6 +36,6 @@
     "dev": "node .",
     "build": "next build",
     "heroku-postbuild": "yarn build",
-    "start": "NODE_ENV=production next start"
+    "start": "NODE_ENV=production node ."
   }
 }
