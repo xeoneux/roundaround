@@ -5,9 +5,9 @@ const withCSS = require("@zeit/next-css");
 const { parsed } = dotenv.config();
 
 module.exports = withCSS({
-  webpack(configuration) {
+  webpack(config) {
     const env = new webpack.EnvironmentPlugin(parsed);
-    configuration.plugins.push(env);
-    return configuration;
+    config.plugins.push(env);
+    return config;
   }
 });

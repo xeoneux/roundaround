@@ -1,8 +1,9 @@
 /* eslint-disable react/no-array-index-key */
 
 import React from "react";
-import ReactMapGL, { Marker, FlyToInterpolator } from "react-map-gl";
+import ReactMapGL, { Popup, Marker, FlyToInterpolator } from "react-map-gl";
 
+import Info from "./info";
 import emitter from "../helpers/events";
 import PinIcon from "../assets/icons/pin";
 
@@ -11,6 +12,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 export default class Map extends React.Component {
   state = {
     markers: [],
+    popupInfo: null,
     viewport: {
       zoom: 8,
       latitude: 40.7128,
@@ -23,7 +25,7 @@ export default class Map extends React.Component {
       const { viewport } = this.state;
       const { latitude, longitude } = location;
       const newViewport = {
-        zoom: 16,
+        zoom: 15,
         latitude,
         longitude,
         transitionDuration: 2000,
@@ -40,6 +42,24 @@ export default class Map extends React.Component {
 
   componentWillUnmount() {
     emitter.removeAllListeners("UPDATE_LOCATION");
+  }
+
+  renderPopup() {
+    const { popupInfo } = this.state;
+
+    return (
+      popupInfo && (
+        <Popup
+          anchor="top"
+          closeOnClick={false}
+          latitude={popupInfo.latitude}
+          longitude={popupInfo.longitude}
+          onClose={() => this.setState({ popupInfo: null })}
+        >
+          <Info {...popupInfo} />
+        </Popup>
+      )
+    );
   }
 
   render() {
@@ -60,9 +80,13 @@ export default class Map extends React.Component {
       >
         {markers.map((marker, index) => (
           <Marker key={index} {...marker}>
-            <PinIcon {...marker} />
+            <PinIcon
+              {...marker}
+              onClick={() => this.setState({ popupInfo: marker })}
+            />
           </Marker>
         ))}
+        {this.renderPopup()}
       </ReactMapGL>
     );
   }

@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const PinIcon = ({ color }) => (
-  <svg width="25" height="25" viewBox="0 0 426.667 426.667">
+const PinIcon = ({ color, onClick }) => (
+  <svg width="25" height="25" viewBox="0 0 426.667 426.667" onClick={onClick}>
     <path
       style={{ fill: color }}
       d="M213.342,0C126.763,0,56.478,70.293,56.478,156.817c0,36.151,13.15,68.48,32.495,95.633
@@ -18,7 +18,8 @@ const PinIcon = ({ color }) => (
 );
 
 PinIcon.propTypes = {
-  color: PropTypes.string.isRequired
+  color: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired
 };
 
 export default PinIcon;

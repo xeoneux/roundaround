@@ -87,8 +87,15 @@ export default class Places extends React.Component {
 
       nearbyPlaces.forEach(nearbyPlace => {
         nearbyPlace.results.forEach(result => {
+          const { icon, name, rating, vicinity } = result;
           nearbyPlacesFlat.push({
+            icon,
+            name,
+            rating,
+            vicinity,
+            id: result.place_id,
             color: nearbyPlace.type.color,
+            totalRatings: result.user_ratings_total,
             photo:
               result.photos &&
               result.photos.length &&
