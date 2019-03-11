@@ -88,6 +88,14 @@ export default class Places extends React.Component {
         "PRINT_NEARBY",
         results.map(result => {
           return {
+            color: (() => {
+              let color;
+              console.log(result);
+            })(),
+            photo:
+              result.photos &&
+              result.photos.length &&
+              result.photos[0].getUrl(),
             latitude: result.geometry.location.lat(),
             longitude: result.geometry.location.lng()
           };

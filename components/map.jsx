@@ -48,7 +48,13 @@ export default class Map extends React.Component {
         width="100vw"
         height="100vh"
         mapboxApiAccessToken={process.env.MAPBOX}
-        onViewportChange={vp => this.setState({ viewport: vp })}
+        onViewportChange={vp => {
+          emitter.emit("UPDATE_COORDINATES", {
+            latitude: vp.latitude,
+            longitude: vp.longitude
+          });
+          this.setState({ viewport: vp });
+        }}
       >
         {markers.map(marker => (
           <Marker {...marker}>

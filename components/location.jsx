@@ -28,7 +28,15 @@ const LocationValueWrapper = styled.p`
 `;
 
 class Location extends React.Component {
-  static propTypes = { ...geoPropTypes };
+  static propTypes = geoPropTypes;
+
+  state = { latitude: null, longitude: null };
+
+  componentDidMount() {
+    emitter.addListener("UPDATE_COORDINATES", coords => {
+      this.setState({ ...coords });
+    });
+  }
 
   componentDidUpdate(prevProps) {
     if (this.props !== prevProps) this.updateLocation();
@@ -40,17 +48,15 @@ class Location extends React.Component {
   };
 
   render() {
-    const { coords } = this.props;
-    const lat =
-      (coords && coords.latitude && coords.latitude.toFixed(4)) || "__";
-    const long =
-      (coords && coords.longitude && coords.longitude.toFixed(4)) || "__";
+    const { latitude, longitude } = this.state;
+    const lat = (latitude && latitude.toFixed(4)) || "__";
+    const long = (longitude && longitude.toFixed(4)) || "__";
 
     return (
       <LocationWrapper>
         <LocationIconWrapper
           type="button"
-          disabled={!coords}
+          disabled={!(lat || long)}
           onClick={this.updateLocation}
         >
           <LocationIcon />
