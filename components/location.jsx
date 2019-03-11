@@ -3,7 +3,13 @@ import styled from "@emotion/styled";
 import { geolocated, geoPropTypes } from "react-geolocated";
 
 import emitter from "../helpers/events";
+import RefreshIcon from "../assets/icons/refresh";
 import LocationIcon from "../assets/icons/location";
+
+const IconWrapper = styled.button`
+  border: none;
+  background: transparent;
+`;
 
 const LocationWrapper = styled.footer`
   left: 2em;
@@ -14,11 +20,6 @@ const LocationWrapper = styled.footer`
   position: absolute;
   align-items: center;
   justify-content: center;
-`;
-
-const LocationIconWrapper = styled.button`
-  border: none;
-  background: transparent;
 `;
 
 const LocationValueWrapper = styled.p`
@@ -39,16 +40,20 @@ class Location extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props !== prevProps) this.updateLocation();
+    if (this.props !== prevProps) this.updateLocationFromProps();
   }
 
   componentWillUnmount() {
     emitter.removeAllListeners("UPDATE_COORDINATES");
   }
 
-  updateLocation = () => {
+  updateLocationFromProps = () => {
     const { coords } = this.props;
     if (coords) emitter.emit("UPDATE_LOCATION", coords);
+  };
+
+  updateLocationFromState = () => {
+    emitter.emit("UPDATE_LOCATION", this.state);
   };
 
   render() {
@@ -58,15 +63,22 @@ class Location extends React.Component {
 
     return (
       <LocationWrapper>
-        <LocationIconWrapper
+        <IconWrapper
           type="button"
           disabled={!(lat || long)}
-          onClick={this.updateLocation}
+          onClick={this.updateLocationFromProps}
         >
           <LocationIcon />
-        </LocationIconWrapper>
+        </IconWrapper>
         <LocationValueWrapper>{lat}</LocationValueWrapper>
         <LocationValueWrapper>{long}</LocationValueWrapper>
+        <IconWrapper
+          type="button"
+          disabled={!(lat || long)}
+          onClick={this.updateLocationFromState}
+        >
+          <RefreshIcon />
+        </IconWrapper>
       </LocationWrapper>
     );
   }

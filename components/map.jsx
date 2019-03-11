@@ -1,3 +1,5 @@
+/* eslint-disable react/no-array-index-key */
+
 import React from "react";
 import ReactMapGL, { Marker, FlyToInterpolator } from "react-map-gl";
 
@@ -21,7 +23,7 @@ export default class Map extends React.Component {
       const { viewport } = this.state;
       const { latitude, longitude } = location;
       const newViewport = {
-        zoom: 15,
+        zoom: 16,
         latitude,
         longitude,
         transitionDuration: 2000,
@@ -57,12 +59,8 @@ export default class Map extends React.Component {
         }}
       >
         {markers.map((marker, index) => (
-          <Marker
-            key={index}
-            latitude={marker.latitude}
-            longitude={marker.longitude}
-          >
-            <PinIcon color={marker.color} />
+          <Marker key={index} {...marker}>
+            <PinIcon {...marker} />
           </Marker>
         ))}
       </ReactMapGL>
