@@ -77,30 +77,29 @@ export default class Places extends React.Component {
 
   componentDidMount() {
     emitter.addListener("FETCH_NEARBY", async location => {
+      const nearbyPlacesFlat = [];
       const { selectedValues } = this.state;
-      const results = await getNearbyPlaces(
+      const nearbyPlaces = await getNearbyPlaces(
         location.latitude,
         location.longitude,
         selectedValues
       );
 
-      emitter.emit(
-        "PRINT_NEARBY",
-        results.map(result => {
-          return {
-            color: (() => {
-              let color;
-              console.log(result);
-            })(),
+      nearbyPlaces.forEach(nearbyPlace => {
+        nearbyPlace.results.forEach(result => {
+          nearbyPlacesFlat.push({
+            color: nearbyPlace.type.color,
             photo:
               result.photos &&
               result.photos.length &&
               result.photos[0].getUrl(),
             latitude: result.geometry.location.lat(),
             longitude: result.geometry.location.lng()
-          };
-        })
-      );
+          });
+        });
+      });
+
+      emitter.emit("PRINT_NEARBY", nearbyPlacesFlat);
     });
   }
 

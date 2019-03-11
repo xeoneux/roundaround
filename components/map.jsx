@@ -56,9 +56,13 @@ export default class Map extends React.Component {
           this.setState({ viewport: vp });
         }}
       >
-        {markers.map(marker => (
-          <Marker {...marker}>
-            <PinIcon color="red" />
+        {markers.map((marker, index) => (
+          <Marker
+            key={index}
+            latitude={marker.latitude}
+            longitude={marker.longitude}
+          >
+            <PinIcon color={marker.color} />
           </Marker>
         ))}
       </ReactMapGL>

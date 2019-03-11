@@ -42,6 +42,10 @@ class Location extends React.Component {
     if (this.props !== prevProps) this.updateLocation();
   }
 
+  componentWillUnmount() {
+    emitter.removeAllListeners("UPDATE_COORDINATES");
+  }
+
   updateLocation = () => {
     const { coords } = this.props;
     if (coords) emitter.emit("UPDATE_LOCATION", coords);
