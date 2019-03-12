@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import UserCard from "react-ui-cards/src/UserCard";
 
 export default class Info extends React.PureComponent {
   static propTypes = {
@@ -19,7 +20,7 @@ export default class Info extends React.PureComponent {
     photo: null
   };
 
-  render() {
+  componentDidMount() {
     const {
       name,
       icon,
@@ -32,21 +33,28 @@ export default class Info extends React.PureComponent {
       totalRatings
     } = this.props;
 
-    return (
-      <div style={{ backgroundColor: color }}>
-        <p>
-          {icon && <img width={24} height={24} alt="" src={icon} />}
-          {name}
-        </p>
+    this.setState({
+      node: (
+        <UserCard
+          name={name}
+          avatar={icon}
+          header={photo}
+          positionName={vicinity}
+          stats={[
+            { name: "stars", value: rating },
+            { name: "reviews", value: totalRatings },
+            {
+              name: "location",
+              value: `${parseInt(latitude, 10)} | ${parseInt(longitude, 10)}`
+            }
+          ]}
+        />
+      )
+    });
+  }
 
-        <div>{latitude}</div>
-        <div>{longitude}</div>
-        {photo && <img width={240} height={240} alt="" src={photo} />}
-        <div>{vicinity}</div>
-        <div>
-          <p>{`Rating: ${rating} (${totalRatings} total ratings)`}</p>
-        </div>
-      </div>
-    );
+  render() {
+    const { node } = this.state;
+    return <>{node}</>;
   }
 }

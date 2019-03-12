@@ -10,7 +10,7 @@ export default function getNearbyPlaces(latitude, longitude, types) {
       type =>
         new Promise((resolve, reject) =>
           service.nearbySearch(
-            { type, location, radius: "500" },
+            { location, radius: "500", type: [type.value] },
             (results, status) => {
               if (status === google.maps.places.PlacesServiceStatus.OK)
                 resolve({ type, results });
