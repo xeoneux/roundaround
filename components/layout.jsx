@@ -18,6 +18,7 @@ const Header = styled.header`
   display: flex;
   position: absolute;
   align-items: center;
+  flex-direction: column;
   justify-content: space-between;
 `;
 
@@ -35,8 +36,8 @@ export default () => (
       />
     </Head>
     <Header>
-      <Places />
       <Logo />
+      <Places />
     </Header>
     <Map />
     <Location />
