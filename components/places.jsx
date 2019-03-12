@@ -110,6 +110,10 @@ export default class Places extends React.Component {
     });
   }
 
+  handleChange = selectedValues => {
+    this.setState({ selectedValues });
+  };
+
   render() {
     return (
       <PlacesWrapper>
@@ -119,6 +123,7 @@ export default class Places extends React.Component {
           styles={customStyles}
           closeMenuOnSelect={false}
           defaultValue={defaultValues}
+          onChange={this.handleChange}
         />
       </PlacesWrapper>
     );

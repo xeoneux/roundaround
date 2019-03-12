@@ -12,7 +12,6 @@ export default class Info extends React.PureComponent {
     icon: PropTypes.string,
     photo: PropTypes.string,
     name: PropTypes.string.isRequired,
-    color: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
     vicinity: PropTypes.string.isRequired,
     latitude: PropTypes.string.isRequired,
@@ -29,7 +28,6 @@ export default class Info extends React.PureComponent {
     const {
       name,
       icon,
-      color,
       photo,
       rating,
       vicinity,

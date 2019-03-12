@@ -25,7 +25,7 @@ export default class Map extends React.Component {
       const { viewport } = this.state;
       const { latitude, longitude } = location;
       const newViewport = {
-        zoom: 15,
+        zoom: 16,
         latitude,
         longitude,
         transitionDuration: 2000,
