@@ -69,7 +69,7 @@ const defaultValues = placeTypes.filter(type =>
 );
 
 const PlacesWrapper = styled.div`
-  width: 75vw;
+  width: 66vw;
 `;
 
 export default class Places extends React.Component {
