@@ -1,2 +1,8 @@
-# Dependency
+# Env
+.env
+
+# Next
+.next
+
+# Dependencies
 node_modules
