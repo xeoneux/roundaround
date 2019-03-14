@@ -2,28 +2,25 @@ import React from "react";
 import PropTypes from "prop-types";
 import UserCard from "react-ui-cards/src/UserCard";
 
-import DESC_LENGTH from "../helpers/constants";
-
-const truncate = string => {
-  const length = DESC_LENGTH;
-  return string.length > length ? `${string.substring(0, length)}...` : string;
-};
+import truncate from "../helpers/utilities";
 
 export default class Info extends React.PureComponent {
   static propTypes = {
     icon: PropTypes.string,
     photo: PropTypes.string,
+    rating: PropTypes.number,
+    totalRatings: PropTypes.number,
     name: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
     vicinity: PropTypes.string.isRequired,
-    latitude: PropTypes.string.isRequired,
-    longitude: PropTypes.string.isRequired,
-    totalRatings: PropTypes.number.isRequired
+    latitude: PropTypes.number.isRequired,
+    longitude: PropTypes.number.isRequired
   };
 
   static defaultProps = {
     icon: null,
-    photo: null
+    photo: null,
+    rating: null,
+    totalRatings: null
   };
 
   render() {
