@@ -8,8 +8,6 @@ import Places from "./places";
 import Location from "./location";
 import Global from "../styles/global";
 
-import "sanitize.css";
-
 const Header = styled.header`
   top: 1em;
   left: 2em;

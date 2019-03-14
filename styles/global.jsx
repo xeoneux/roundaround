@@ -1,6 +1,8 @@
 import React from "react";
 import { css, Global } from "@emotion/core";
 
+import "sanitize.css";
+
 export default () => (
   <Global
     styles={css`

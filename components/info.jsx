@@ -2,8 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import UserCard from "react-ui-cards/src/UserCard";
 
+import DESC_LENGTH from "../helpers/constants";
+
 const truncate = string => {
-  const length = 75;
+  const length = DESC_LENGTH;
   return string.length > length ? `${string.substring(0, length)}...` : string;
 };
 
