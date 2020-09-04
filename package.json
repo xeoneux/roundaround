@@ -13,7 +13,7 @@
     "next": "^8.0.3",
     "next-routes": "^1.4.2",
     "next-transpile-modules": "^2.2.0",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.13.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
