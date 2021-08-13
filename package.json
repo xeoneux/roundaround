@@ -10,7 +10,7 @@
     "express": "^4.16.4",
     "fbemitter": "^2.1.1",
     "mapbox-gl": "^0.53.1",
-    "next": "^8.0.3",
+    "next": "^11.1.0",
     "next-routes": "^1.4.2",
     "next-transpile-modules": "^2.2.0",
     "node-sass": "^4.11.0",
