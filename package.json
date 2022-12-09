@@ -7,7 +7,7 @@
     "chroma-js": "^2.0.3",
     "dotenv": "^6.2.0",
     "esm": "^3.2.11",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "fbemitter": "^2.1.1",
     "mapbox-gl": "^0.53.1",
     "next": "^8.0.3",
